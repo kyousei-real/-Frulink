@@ -1,5 +1,5 @@
 # -Frulink
-## 免责声明 / Disclaimer
+## 免责声明
 
 1. 本项目仅供学习和技术交流使用，不得用于任何形式的商业用途。
 2. 项目中使用的美术资源、音频或相关素材，其版权均归  NEXON Games & Yostar (《蔚蓝档案》/ Blue Archive) 官方所有。
