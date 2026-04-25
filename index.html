@@ -259,6 +259,13 @@
             background: #ffffff;
             box-shadow: 0 4px 10px rgba(0, 0, 0, 0.12);
         }
+        .edit-btn:hover {
+            border-color: var(--kotona-purple);
+            color: #8a5fb3;
+        }
+        .edit-btn:hover svg {
+            stroke: #9a76c9;
+        }
         .screenshot-btn:hover {
             border-color: var(--bg-blue);
             color: #2c3e66;
@@ -281,6 +288,9 @@
             stroke: #5aad5a;
         }
         
+        .edit-btn svg {
+            stroke: #8a65b3;
+        }
         .screenshot-btn svg {
             stroke: #5a7bb5;
         }
@@ -290,10 +300,42 @@
         .move-btn svg {
             stroke: #5a8f5a;
         }
+        
+        /* 富文本编辑器样式 */
+        .editor-toolbar {
+            display: flex;
+            gap: 5px;
+            margin-bottom: 10px;
+            padding: 5px;
+            background: var(--bg-gray);
+            border-radius: 8px;
+            border: 1px solid var(--border-color);
+        }
+        
+        .toolbar-btn {
+            width: 32px;
+            height: 32px;
+            border: 1px solid var(--border-color);
+            background: white;
+            border-radius: 4px;
+            cursor: pointer;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            font-weight: bold;
+            font-size: 14px;
+            transition: all 0.2s;
+        }
+        
+        .toolbar-btn:hover {
+            background: var(--bg-blue);
+            color: white;
+            border-color: var(--bg-blue);
+        }
 
         .tweet-card.reply-format {
             padding: 0;
-            overflow: hidden;
+            overflow: visible;
         }
         .reply-wrapper {
             display: flex;
@@ -301,24 +343,29 @@
         }
         .reply-side-bar {
             width: 28px;
-            background-color: var(--reply-gray-bar);
+            background: linear-gradient(to bottom, #f3f3f3, #ffffff);
             flex-shrink: 0;
             display: flex;
             flex-direction: column;
             align-items: center;
             justify-content: flex-start;
             border-radius: 4px 0 0 4px;
+            border-right: 1px solid #d0d0d0;
         }
         .reply-line-marker {
-            width: 0;
-            height: 0;
-            background-color: transparent;
-            border-left: 5px solid transparent;
-            border-right: 5px solid transparent;
-            border-bottom: 8px solid #cbd5e1;
-            margin-top: 10px;
-            border-radius: 0;
-            opacity: 0.7;
+            width: 14px;
+            height: 9px;
+            margin-top: 5px;
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            flex-shrink: 0;
+            line-height: 0;
+        }
+
+        .reply-line-marker svg {
+            width: 100%;
+            height: 100%;
         }
         .reply-content {
             flex: 1;
@@ -556,6 +603,264 @@
             z-index: 50;
             background: rgba(255,255,255,0.95);
             backdrop-filter: blur(12px);
+        }
+        
+        /* 响应式设计 */
+        @media (max-width: 1024px) {
+            .app-layout {
+                flex-direction: column;
+                align-items: center;
+                gap: 15px;
+            }
+            
+            .frulink-container {
+                width: 100%;
+                max-width: 600px;
+                height: auto;
+                min-height: 60vh;
+            }
+            
+            .control-panel {
+                width: 100%;
+                max-width: 600px;
+                height: auto;
+                min-height: 40vh;
+            }
+        }
+        
+        @media (max-width: 768px) {
+            body {
+                padding: 10px;
+                height: auto;
+                min-height: 100vh;
+            }
+            
+            .frulink-container {
+                border-width: 4px;
+            }
+            
+            .header {
+                height: 40px;
+                padding: 0 10px;
+            }
+            
+            .header .title {
+                font-size: 20px;
+            }
+            
+            .topic-section {
+                margin: 8px;
+            }
+            
+            .feed-container {
+                padding: 0 10px 15px 10px;
+            }
+            
+            .tweet-card {
+                padding: 12px;
+                margin-bottom: 8px;
+            }
+            
+            .avatar {
+                width: 40px;
+                height: 40px;
+            }
+            
+            .author-name {
+                font-size: 14px;
+            }
+            
+            .author-id, .time {
+                font-size: 12px;
+            }
+            
+            .tweet-text {
+                font-size: 13px;
+                line-height: 1.4;
+            }
+            
+            .control-panel {
+                padding: 15px;
+            }
+            
+            .form-group input[type="text"],
+            .form-group input[type="number"],
+            .form-group textarea {
+                padding: 10px;
+            }
+            
+            .form-group textarea {
+                height: 100px;
+            }
+            
+            .editor-toolbar {
+                gap: 3px;
+                padding: 3px;
+            }
+            
+            .toolbar-btn {
+                width: 28px;
+                height: 28px;
+                font-size: 12px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            body {
+                padding: 5px;
+            }
+            
+            .frulink-container {
+                border-width: 3px;
+                border-radius: 8px;
+            }
+            
+            .header {
+                height: 36px;
+            }
+            
+            .header .title {
+                font-size: 18px;
+            }
+            
+            .topic-section {
+                margin: 6px;
+            }
+            
+            .topic-info {
+                padding: 8px 12px;
+            }
+            
+            .topic-title {
+                font-size: 14px;
+            }
+            
+            .topic-desc {
+                font-size: 11px;
+            }
+            
+            .feed-container {
+                padding: 0 8px 12px 8px;
+            }
+            
+            .tweet-card {
+                padding: 10px;
+                margin-bottom: 6px;
+            }
+            
+            .card-actions-group {
+                top: 8px;
+                right: 8px;
+                gap: 6px;
+            }
+            
+            .action-btn {
+                padding: 4px 8px;
+                font-size: 10px;
+            }
+            
+            .action-btn svg {
+                width: 11px;
+                height: 11px;
+            }
+            
+            .avatar {
+                width: 36px;
+                height: 36px;
+                margin-right: 10px;
+            }
+            
+            .tweet-meta {
+                flex-direction: column;
+                align-items: flex-start;
+                gap: 2px;
+            }
+            
+            .tweet-actions {
+                gap: 15px;
+                font-size: 12px;
+            }
+            
+            .action-item svg {
+                width: 16px;
+                height: 16px;
+            }
+            
+            .control-panel {
+                padding: 12px;
+                border-radius: 8px;
+            }
+            
+            .panel-header h2 {
+                font-size: 16px;
+            }
+            
+            .form-group {
+                margin-bottom: 12px;
+            }
+            
+            .form-group label {
+                font-size: 13px;
+            }
+            
+            button.submit-btn {
+                padding: 10px;
+                font-size: 14px;
+            }
+            
+            .radio-group {
+                flex-direction: column;
+                gap: 8px;
+            }
+            
+            /* 编辑模态框适配 */
+            .edit-modal {
+                width: 95% !important;
+                max-width: 400px;
+                padding: 15px;
+            }
+            
+            .edit-modal h3 {
+                font-size: 16px;
+                margin-bottom: 15px;
+            }
+            
+            /* 颜色选择器适配 */
+            #colorPickerModal .edit-modal {
+                width: 90% !important;
+                max-width: 300px;
+            }
+            
+            /* 表情选择器适配 */
+            #emojiPickerModal .edit-modal {
+                width: 90% !important;
+                max-width: 300px;
+            }
+            
+            #emojiGrid {
+                grid-template-columns: repeat(6, 1fr) !important;
+                gap: 8px !important;
+            }
+        }
+        
+        /* 触摸设备优化 */
+        @media (hover: none) and (pointer: coarse) {
+            .card-actions-group {
+                opacity: 1;
+                transform: translateY(0);
+            }
+            
+            .action-btn {
+                padding: 8px 12px;
+                font-size: 12px;
+            }
+            
+            .edit-icon {
+                opacity: 1;
+            }
+        }
+        
+        .global-screenshot-btn {
             border-radius: 40px;
             padding: 8px 16px;
             font-size: 13px;
@@ -565,21 +870,48 @@
             cursor: pointer;
             display: flex;
             align-items: center;
-            gap: 8px;
-            transition: all 0.2s;
-            color: #2c3e66;
+            gap: 6px;
+            transition: all 0.3s ease;
         }
+        
         .global-screenshot-btn:hover {
             background: white;
-            border-color: var(--bg-blue);
-            transform: scale(1.02);
+            box-shadow: 0 6px 16px rgba(0,0,0,0.15);
         }
+        
         .global-screenshot-btn svg {
-            width: 18px;
-            height: 18px;
-            stroke: var(--bg-blue);
+            width: 16px;
+            height: 16px;
+            stroke: #2c3e66;
             stroke-width: 1.8;
             fill: none;
+        }
+        
+        /* 响应式调整 */
+        @media (max-width: 768px) {
+            .global-screenshot-btn {
+                padding: 6px 12px;
+                font-size: 11px;
+                top: 60px;
+                right: 15px;
+            }
+        }
+        
+        @media (max-width: 480px) {
+            .global-screenshot-btn {
+                padding: 6px;
+                right: 10px;
+                top: 55px;
+            }
+            
+            .global-screenshot-btn span {
+                display: none;
+            }
+            
+            .global-screenshot-btn svg {
+                width: 20px;
+                height: 20px;
+            }
         }
 
         .show-panel-fab {
@@ -642,6 +974,8 @@
         .edit-modal {
             background: white;
             width: 480px;
+            max-height: 85vh;
+            overflow-y: auto;
             border-radius: 20px;
             padding: 24px;
             box-shadow: 0 20px 35px rgba(0,0,0,0.3);
@@ -794,18 +1128,64 @@
         <form id="tweet-form">
             <div class="form-group"><label>格式选择</label><div class="radio-group"><label><input type="radio" name="format" value="normal" checked onchange="toggleRetweetField()"> 正常</label><label><input type="radio" name="format" value="reply" onchange="toggleRetweetField()"> 回复</label><label><input type="radio" name="format" value="retweet" onchange="toggleRetweetField()"> 转发</label></div></div>
             <div class="form-group" id="retweeter-group"><label>转发者昵称</label><input type="text" id="retweeter" placeholder="例：超天才清楚系病弱美少女黑客"></div>
-            <div class="form-group"><label>昵称</label><input type="text" id="nickname" placeholder="例：明星日鞠"></div>
+            <div class="form-group" style="position: relative;"><label>昵称</label><input type="text" id="nickname" placeholder="例：明星日鞠"><div style="position: absolute; right: 10px; top: 40px;"><button type="button" id="characterSelectBtn" class="submit-btn" style="padding: 5px 10px; font-size: 12px; background: var(--kotona-purple);">选择人物</button></div></div>
             <div class="form-group"><label>ID (包含@)</label><input type="text" id="userid" placeholder="例：@Akeboshi_himari"></div>
             <div class="form-group"><label>头像图片 (可选)</label><input type="file" id="avatar-img" accept="image/*"></div>
-            <div class="form-group"><label>推文内容</label><textarea id="content" placeholder="请输入文本" required></textarea></div>
+            <div class="form-group"><label>推文内容</label>
+                <div class="editor-toolbar">
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('**', '**', '粗体')">B</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('*', '*', '斜体')">I</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('~~', '~~', '删除线')">S</button>
+                    <button type="button" class="toolbar-btn" onclick="openColorPicker('content')">颜色</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('# ', '', '标题')">H</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('- ', '', '列表')">•</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('```', '```', '代码')">{ }</button>
+                    <button type="button" class="toolbar-btn" onclick="openEmojiPicker('content')">😊</button>
+                </div>
+                <textarea id="content" placeholder="请输入文本，支持Markdown语法" required></textarea>
+            </div>
             <div class="form-group"><label>推文图片 (可选)</label><input type="file" id="tweet-img" accept="image/*"></div>
             <div class="form-group" style="display: flex; gap: 10px;"><div style="flex:1;"><label>时间</label><input type="text" id="time" placeholder="例：1分钟前" value="1分钟前"></div><div style="flex:1;"><label>转发数</label><input type="number" id="retweets" placeholder="请输入数字" value="0"></div><div style="flex:1;"><label>喜欢数</label><input type="number" id="likes" placeholder="请输入数字" value="0"></div></div>
+            <div class="form-group" style="margin-top: 20px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <h3 style="margin-bottom: 10px; font-size: 16px; color: var(--text-dark);">数据管理</h3>
+                <div style="display: grid; grid-template-columns: 1fr 1fr; gap: 10px;">
+                    <button type="button" class="submit-btn" style="background: var(--bg-blue);" onclick="saveData()">保存数据</button>
+                    <button type="button" class="submit-btn" style="background: var(--fru-cyan);" onclick="loadData()">加载数据</button>
+                    <button type="button" class="submit-btn" style="background: var(--hare-green);" onclick="exportData()">导出JSON</button>
+                    <button type="button" class="submit-btn" style="background: var(--eimi-pink);" onclick="importData()">导入JSON</button>
+                </div>
+            </div>
+            <div class="form-group" style="margin-top: 15px; border-top: 1px solid var(--border-color); padding-top: 15px;">
+                <h3 style="margin-bottom: 10px; font-size: 16px; color: var(--text-dark);">操作管理</h3>
+                <div style="display: flex; gap: 10px;">
+                    <button type="button" id="undoBtn" class="submit-btn" style="flex: 1; background: var(--kotona-purple);" onclick="undo()">撤销</button>
+                    <button type="button" id="redoBtn" class="submit-btn" style="flex: 1; background: var(--maki-red);" onclick="redo()">恢复</button>
+                </div>
+            </div>
             <button type="button" class="submit-btn" onclick="addTweet()">发布推文</button>
         </form>
     </div>
 </div>
 <div class="show-panel-fab" id="showPanelFab" title="显示工具面板"><svg class="pen-icon" viewBox="0 0 24 24"><path d="M17 3L21 7L7 21H3V17L17 3Z" stroke="currentColor" fill="none" stroke-width="2"/><path d="M15 5L19 9" stroke="currentColor" stroke-width="2"/></svg></div>
 <div id="topicModal" class="modal-overlay"><div class="edit-modal"><h3>编辑话题信息</h3><label style="font-weight:bold;">话题标题</label><input type="text" id="modalTopicTitle"><label style="font-weight:bold;">话题描述</label><textarea id="modalTopicDesc"></textarea><div class="modal-buttons"><button class="cancel-btn" id="cancelModalBtn">取消</button><button class="save-btn" id="saveTopicBtn">保存更改</button></div></div></div>
+<div id="tweetEditModal" class="modal-overlay"><div class="edit-modal"><h3>编辑推文</h3><label style="font-weight:bold;">格式</label><div style="display: flex; gap: 10px; margin-bottom: 15px;"><label><input type="radio" name="editFormat" value="normal"> 正常</label><label><input type="radio" name="editFormat" value="reply"> 回复</label><label><input type="radio" name="editFormat" value="retweet"> 转发</label></div><div class="form-group" id="editRetweeter-group"><label>转发者昵称</label><input type="text" id="editRetweeter" placeholder="例：超天才清楚系病弱美少女黑客"></div><div class="form-group" style="position: relative;"><label>昵称</label><input type="text" id="editNickname" placeholder="例：明星日鞠"><div style="position: absolute; right: 10px; top: 40px;"><button type="button" class="submit-btn" onclick="openCharacterSelectModal('edit')" style="padding: 5px 10px; font-size: 12px; background: var(--kotona-purple);">选择人物</button></div></div><div class="form-group"><label>ID (包含@)</label><input type="text" id="editUserid" placeholder="例：@Akeboshi_himari"></div><div class="form-group"><label>头像图片 (可选)</label><input type="file" id="editAvatar-img" accept="image/*"></div><div class="form-group"><label>推文内容</label>
+                <div class="editor-toolbar">
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('**', '**', '粗体', 'editContent')">B</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('*', '*', '斜体', 'editContent')">I</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('~~', '~~', '删除线', 'editContent')">S</button>
+                    <button type="button" class="toolbar-btn" onclick="openColorPicker('editContent')">颜色</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('# ', '', '标题', 'editContent')">H</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('- ', '', '列表', 'editContent')">•</button>
+                    <button type="button" class="toolbar-btn" onclick="insertMarkdown('```', '```', '代码', 'editContent')">{ }</button>
+                    <button type="button" class="toolbar-btn" onclick="openEmojiPicker('editContent')">😊</button>
+                </div>
+                <textarea id="editContent" placeholder="请输入文本，支持Markdown语法" required></textarea>
+            </div><div class="form-group"><label>推文图片 (可选)</label><input type="file" id="editTweet-img" accept="image/*"></div><div class="form-group" style="display: flex; gap: 10px;"><div style="flex:1;"><label>时间</label><input type="text" id="editTime" placeholder="例：1分钟前"></div><div style="flex:1;"><label>转发数</label><input type="number" id="editRetweets" placeholder="请输入数字"></div><div style="flex:1;"><label>喜欢数</label><input type="number" id="editLikes" placeholder="请输入数字"></div></div><div class="modal-buttons"><button class="cancel-btn" id="cancelEditModalBtn">取消</button><button class="save-btn" id="saveEditTweetBtn">保存更改</button></div></div></div>
+<div id="characterSelectModal" class="modal-overlay"><div class="edit-modal" style="max-height: 80vh; overflow-y: auto;"><h3>选择人物</h3><div id="characterList" style="margin-bottom: 20px;"></div><div class="modal-buttons"><button class="cancel-btn" id="cancelCharacterSelectBtn">取消</button><button class="save-btn" id="addNewCharacterBtn">添加新人物</button></div></div></div>
+<div id="characterEditModal" class="modal-overlay"><div class="edit-modal"><h3>添加/编辑人物</h3><div class="form-group"><label>昵称</label><input type="text" id="characterName" placeholder="例：明星日鞠" required></div><div class="form-group"><label>ID (包含@)</label><input type="text" id="characterUserid" placeholder="例：@Akeboshi_himari" required></div><div class="form-group"><label>头像图片</label><input type="file" id="characterAvatar-img" accept="image/*"></div><div class="modal-buttons"><button class="cancel-btn" id="cancelCharacterEditBtn">取消</button><button class="save-btn" id="saveCharacterBtn">保存</button></div></div></div>
+<div id="emojiPickerModal" class="modal-overlay"><div class="edit-modal" style="width: 300px;"><h3>选择表情</h3><div id="emojiGrid" style="display: grid; grid-template-columns: repeat(8, 1fr); gap: 10px; margin: 20px 0;"></div><div class="modal-buttons"><button class="cancel-btn" id="cancelEmojiPickerBtn">关闭</button></div></div></div>
+<div id="colorPickerModal" class="modal-overlay"><div class="edit-modal" style="width: 300px;"><h3>选择颜色</h3><div style="margin: 20px 0;"><input type="color" id="colorInput" style="width: 100%; height: 50px; border: none; border-radius: 8px;"></div><div style="margin: 10px 0;"><label>RGB值:</label><input type="text" id="rgbValue" style="width: 100%; padding: 5px; border: 1px solid var(--border-color); border-radius: 4px;"></div><div class="modal-buttons"><button class="cancel-btn" id="cancelColorPickerBtn">取消</button><button class="save-btn" id="confirmColorBtn">确认</button></div></div></div>
+<div id="atUserSuggestions" class="at-user-suggestions" style="position: absolute; background: white; border: 1px solid var(--border-color); border-radius: 8px; box-shadow: 0 2px 10px rgba(0,0,0,0.1); z-index: 1000; max-height: 200px; overflow-y: auto; display: none;"></div>
 <div id="toastMsg" class="toast-msg"></div>
 
 <script>
@@ -1046,25 +1426,137 @@
             if (card.querySelector('.card-actions-group')) return;
             const actionsGroup = document.createElement('div');
             actionsGroup.className = 'card-actions-group';
+            
+            // 只保留最常用的按钮
+            const editBtn = document.createElement('button');
+            editBtn.className = 'action-btn edit-btn';
+            editBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M17 3L21 7L7 21H3V17L17 3Z"/><path d="M15 5L19 9"/></svg><span>编辑</span>`;
+            editBtn.addEventListener('click', (e) => { e.stopPropagation(); editTweet(card); });
+            
             const screenshotBtn = document.createElement('button');
             screenshotBtn.className = 'action-btn screenshot-btn';
             screenshotBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg><span>截图</span>`;
             screenshotBtn.addEventListener('click', (e) => { e.stopPropagation(); captureTweetAsImage(card); });
+            
             const deleteBtn = document.createElement('button');
             deleteBtn.className = 'action-btn delete-btn';
             deleteBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg><span>删除</span>`;
-            deleteBtn.addEventListener('click', (e) => { e.stopPropagation(); if(confirm('删除此推文？')){ card.remove(); showToast("已删除"); } });
-            const moveWrapper = document.createElement('div'); moveWrapper.style.position = 'relative';
-            const moveBtn = document.createElement('button'); moveBtn.className = 'action-btn move-btn';
-            moveBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M5 9l3-3-3-3M9 5h10M5 15l3 3-3 3M5 15h14M19 9l3 3-3 3M15 19h4"/></svg><span>移动</span>`;
-            const selectorMenu = document.createElement('div'); selectorMenu.className = 'move-selector';
-            selectorMenu.innerHTML = `<div data-dir="up">⬆ 上移一位</div><div data-dir="down">⬇ 下移一位</div><hr><div data-dir="top">最上</div><div data-dir="bottom">最下</div>`;
-            moveBtn.addEventListener('click', (e) => { e.stopPropagation(); document.querySelectorAll('.move-selector').forEach(m=>{ if(m!==selectorMenu) m.classList.remove('show'); }); selectorMenu.classList.toggle('show'); });
-            selectorMenu.querySelectorAll('[data-dir]').forEach(opt => { opt.addEventListener('click', (e) => { e.stopPropagation(); moveTweet(card, opt.getAttribute('data-dir')); selectorMenu.classList.remove('show'); }); });
-            document.addEventListener('click', (e) => { if(!moveWrapper.contains(e.target)) selectorMenu.classList.remove('show'); });
-            moveWrapper.appendChild(moveBtn); moveWrapper.appendChild(selectorMenu);
-            actionsGroup.appendChild(screenshotBtn); actionsGroup.appendChild(deleteBtn); actionsGroup.appendChild(moveWrapper);
-            card.style.position = 'relative'; card.appendChild(actionsGroup);
+            deleteBtn.addEventListener('click', (e) => { e.stopPropagation(); if(confirm('删除此推文？')){ recordHistory('delete_tweet'); card.remove(); recordHistory('delete_tweet_done'); showToast("已删除"); } });
+            
+            // 移动端优化：使用更多图标，减少文字
+            if (window.innerWidth <= 768) {
+                editBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M17 3L21 7L7 21H3V17L17 3Z"/><path d="M15 5L19 9"/></svg>`;
+                screenshotBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`;
+                deleteBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg>`;
+            }
+            
+            actionsGroup.appendChild(editBtn);
+            actionsGroup.appendChild(screenshotBtn);
+            actionsGroup.appendChild(deleteBtn);
+            
+            card.style.position = 'relative'; 
+            card.appendChild(actionsGroup);
+            
+            // 添加拖拽功能
+            card.draggable = true;
+            card.addEventListener('dragstart', handleDragStart);
+            card.addEventListener('dragend', handleDragEnd);
+            card.addEventListener('dragover', handleDragOver);
+            card.addEventListener('dragenter', handleDragEnter);
+            card.addEventListener('dragleave', handleDragLeave);
+            card.addEventListener('drop', handleDrop);
+        }
+        
+        // 拖拽功能
+        let draggedElement = null;
+        
+        function clearDragIndicators() {
+            document.querySelectorAll('.tweet-card').forEach(card => {
+                card.style.borderTop = '';
+                card.style.borderBottom = '';
+                card.style.marginTop = '';
+                card.style.marginBottom = '';
+            });
+        }
+        
+        function handleDragStart(e) {
+            draggedElement = this;
+            this.style.opacity = '0.5';
+            e.dataTransfer.effectAllowed = 'move';
+            e.dataTransfer.setData('text/plain', 'tweet-card');
+        }
+        
+        function handleDragEnd(e) {
+            this.style.opacity = '1';
+            clearDragIndicators();
+            draggedElement = null;
+        }
+        
+        function handleDragOver(e) {
+            e.preventDefault();
+            e.dataTransfer.dropEffect = 'move';
+
+            if (!draggedElement) return false;
+            const targetCard = e.target.closest('.tweet-card');
+            clearDragIndicators();
+            if (!targetCard || targetCard === draggedElement) return false;
+            const rect = targetCard.getBoundingClientRect();
+            const shouldInsertAfter = e.clientY > rect.top + rect.height / 2;
+            if (shouldInsertAfter) {
+                targetCard.style.borderBottom = '2px solid var(--bg-blue)';
+                targetCard.style.marginBottom = '10px';
+            } else {
+                targetCard.style.borderTop = '2px solid var(--bg-blue)';
+                targetCard.style.marginTop = '10px';
+            }
+            return false;
+        }
+        
+        function handleDragEnter(e) {
+            if (this !== draggedElement) {
+                this.style.borderBottom = '2px solid var(--bg-blue)';
+                this.style.marginBottom = '10px';
+            }
+        }
+        
+        function handleDragLeave(e) {
+            if (this !== draggedElement) {
+                this.style.borderBottom = '';
+                this.style.marginBottom = '';
+            }
+        }
+        
+        function handleDrop(e) {
+            e.preventDefault();
+            if (e.stopPropagation) {
+                e.stopPropagation();
+            }
+
+            if (!draggedElement) return false;
+
+            const feed = document.getElementById('feed');
+            const targetCard = e.target.closest('.tweet-card');
+            if (!feed || !targetCard || targetCard === draggedElement) {
+                clearDragIndicators();
+                return false;
+            }
+
+            const rect = targetCard.getBoundingClientRect();
+            const shouldInsertAfter = e.clientY > rect.top + rect.height / 2;
+
+            // 记录操作前的历史
+            recordHistory('move_tweet');
+            if (shouldInsertAfter) {
+                feed.insertBefore(draggedElement, targetCard.nextSibling);
+            } else {
+                feed.insertBefore(draggedElement, targetCard);
+            }
+            // 记录操作后的历史
+            recordHistory('move_tweet_done');
+            showToast('推文顺序已调整');
+
+            clearDragIndicators();
+            return false;
         }
         
         function moveTweet(card, direction) {
@@ -1072,7 +1564,9 @@
             if(idx===-1) return; let newIdx = idx;
             if(direction==='up' && idx>0) newIdx = idx-1; else if(direction==='down' && idx<cards.length-1) newIdx = idx+1; else if(direction==='top') newIdx=0; else if(direction==='bottom') newIdx=cards.length-1;
             if(newIdx===idx) { showToast("阿罗娜提醒：边界不可移动！ o(> <;)o"); return; }
+            recordHistory('move_tweet');
             if(newIdx<idx) feed.insertBefore(card, cards[newIdx]); else feed.insertBefore(card, cards[newIdx+1]);
+            recordHistory('move_tweet_done');
             showToast(`普拉娜提醒：已移动至${direction==='top'?'顶部':direction==='bottom'?'底部':(direction==='up'?'上一格':'下一格')}！ (●'◡'●)`);
         }
         
@@ -1087,7 +1581,21 @@
             const time = document.getElementById('time').value;
             const retweets = document.getElementById('retweets').value;
             const likes = document.getElementById('likes').value;
-            const avatarUrl = await getImageUrl(document.getElementById('avatar-img'));
+            
+            if (!nickname || !userid || !content) {
+                showToast('请填写昵称、ID和内容');
+                return;
+            }
+            
+            // 记录操作前的历史
+            recordHistory('add_tweet');
+            
+            // 获取头像URL，优先使用预览中的头像
+            let avatarUrl = await getImageUrl(document.getElementById('avatar-img'));
+            const avatarPreview = document.getElementById('avatarPreview');
+            if (!avatarUrl && avatarPreview) {
+                avatarUrl = avatarPreview.src;
+            }
             const tweetImageUrl = await getImageUrl(document.getElementById('tweet-img'));
             const feed = document.getElementById('feed');
             const tweetCard = document.createElement('div'); tweetCard.className = 'tweet-card';
@@ -1097,19 +1605,1159 @@
             const avatarHtml = avatarUrl ? `<img src="${avatarUrl}" style="width:100%; height:100%; object-fit:cover;">` : defaultAvatarSvg;
             if(format === 'reply') {
                 tweetCard.classList.add('reply-format');
-                tweetCard.innerHTML = `<div class="reply-wrapper"><div class="reply-side-bar"><div class="reply-line-marker"></div></div><div class="reply-content"><div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${escapeHtml(content).replace(/\[blue\](.*?)\[\/blue\]/g, '<span style="color: var(--text-blue);">$1</span>').replace(/\n/g, '<br>')}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div></div></div>`;
+                tweetCard.innerHTML = `<div class="reply-wrapper"><div class="reply-side-bar"><div class="reply-line-marker"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 9" width="14" height="9"><polyline points="1,7.5 7,1.5 13,7.5" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div></div><div class="reply-content"><div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div></div></div>`;
             } else if(format === 'retweet') {
                 const retweetHeaderHtml = retweeter ? `<div class="retweet-header">${retweetIconSvg} ${escapeHtml(retweeter)}</div>` : '';
-                tweetCard.innerHTML = retweetHeaderHtml + `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${escapeHtml(content).replace(/\[blue\](.*?)\[\/blue\]/g, '<span style="color: var(--text-blue);">$1</span>').replace(/\n/g, '<br>')}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
+                tweetCard.innerHTML = retweetHeaderHtml + `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
             } else {
-                tweetCard.innerHTML = `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${escapeHtml(content).replace(/\[blue\](.*?)\[\/blue\]/g, '<span style="color: var(--text-blue);">$1</span>').replace(/\n/g, '<br>')}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
+                tweetCard.innerHTML = `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
             }
             feed.appendChild(tweetCard); feed.scrollTop = feed.scrollHeight;
             attachCardActions(tweetCard); setRandomAvatarColors();
             document.getElementById('content').value = ''; document.getElementById('tweet-img').value = '';
+            
+            // 记录操作后的历史
+            recordHistory('add_tweet_done');
+            showToast('推文已发布');
         }
         function getImageUrl(fileInput) { return new Promise(resolve => { const file = fileInput.files[0]; if(!file) resolve(null); else { const reader = new FileReader(); reader.onload = e => resolve(e.target.result); reader.readAsDataURL(file); } }); }
+        
+        // 保存头像到本地文件
+        function saveAvatarToLocal(file) {
+            return new Promise(resolve => {
+                if (!file) {
+                    resolve(null);
+                } else {
+                    const reader = new FileReader();
+                    reader.onload = e => {
+                        const dataUrl = e.target.result;
+                        // 这里可以实现保存到本地文件的逻辑
+                        // 由于是本地网页，我们暂时使用DataURL
+                        resolve(dataUrl);
+                    };
+                    reader.readAsDataURL(file);
+                }
+            });
+        }
         function setRandomAvatarColors() { const colors = ['var(--icon-blue)', 'var(--badge-cyan)', 'var(--fru-blue)','var(--eimi-pink)','var(--maki-red)','var(--hare-green)','var(--himari-purple)','var(--kyousei-yellow)','var(--chihiro-blue)','var(--kotona-purple)']; document.querySelectorAll('.avatar').forEach(av => { if(!av.style.backgroundColor) av.style.backgroundColor = colors[Math.floor(Math.random() * colors.length)]; }); }
+        
+        function saveData() {
+            const data = {
+                topic: {
+                    title: document.getElementById('topicTitle').innerText.replace('编辑','').trim(),
+                    desc: document.getElementById('topicDesc').innerText
+                },
+                tweets: []
+            };
+            
+            document.querySelectorAll('.tweet-card').forEach(card => {
+                const format = card.classList.contains('reply-format') ? 'reply' : (card.querySelector('.retweet-header') ? 'retweet' : 'normal');
+                const contentEl = card.querySelector('.tweet-text');
+                const metaEl = card.querySelector('.tweet-meta');
+                const actionsEl = card.querySelector('.tweet-actions');
+                
+                if (!contentEl || !metaEl || !actionsEl) return;
+                
+                const tweet = {
+                    format: format,
+                    nickname: metaEl.querySelector('.author-name')?.innerText || '',
+                    userid: metaEl.querySelector('.author-id')?.innerText || '',
+                    content: contentEl.innerText || '',
+                    time: metaEl.querySelector('.time')?.innerText || '',
+                    retweets: actionsEl.querySelector('.action-item:nth-child(1)')?.innerText.replace(/[^0-9]/g, '') || '0',
+                    likes: actionsEl.querySelector('.action-item:nth-child(2)')?.innerText.replace(/[^0-9]/g, '') || '0',
+                    avatarBgColor: card.querySelector('.avatar')?.style.backgroundColor || ''
+                };
+                
+                // 提取头像和图片的base64数据
+                const avatarImg = card.querySelector('.avatar img');
+                if (avatarImg) {
+                    tweet.avatarUrl = avatarImg.src;
+                }
+                
+                const tweetImg = card.querySelector('.tweet-image');
+                if (tweetImg) {
+                    tweet.tweetImageUrl = tweetImg.src;
+                }
+                
+                // 提取转发者信息
+                if (format === 'retweet') {
+                    const retweetHeader = card.querySelector('.retweet-header');
+                    if (retweetHeader) {
+                        tweet.retweeter = retweetHeader.innerText.trim();
+                    }
+                }
+                
+                data.tweets.push(tweet);
+            });
+            
+            localStorage.setItem('frulinkData', JSON.stringify(data));
+            showToast('数据已保存');
+        }
+        
+        function loadData() {
+            const savedData = localStorage.getItem('frulinkData');
+            if (!savedData) return;
+            
+            try {
+                const data = JSON.parse(savedData);
+                
+                // 加载话题信息
+                if (data.topic) {
+                    const topicTitleEl = document.getElementById('topicTitle');
+                    const topicDescEl = document.getElementById('topicDesc');
+                    if (topicTitleEl && topicDescEl) {
+                        topicTitleEl.innerHTML = `${escapeHtml(data.topic.title)} <span class="edit-icon" id="editTopicBtn" title="编辑话题"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 3L21 7L7 21H3V17L17 3Z"/><path d="M15 5L19 9"/></svg>编辑</span>`;
+                        topicDescEl.innerText = data.topic.desc || '';
+                        document.getElementById('editTopicBtn')?.addEventListener('click', openEditModal);
+                    }
+                }
+                
+                // 清空现有推文
+                const feed = document.getElementById('feed');
+                if (feed) {
+                    feed.innerHTML = '';
+                }
+                
+                // 加载推文
+                if (data.tweets && Array.isArray(data.tweets)) {
+                    data.tweets.forEach(tweetData => {
+                        const tweetCard = document.createElement('div');
+                        tweetCard.className = 'tweet-card';
+                        
+                        if (tweetData.format === 'reply') {
+                            tweetCard.classList.add('reply-format');
+                        }
+                        
+                        const retweetIconSvg = `<svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>`;
+                        const heartIconSvg = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+                        const defaultAvatarSvg = `<svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+                        const avatarHtml = tweetData.avatarUrl ? `<img src="${tweetData.avatarUrl}" style="width:100%; height:100%; object-fit:cover;">` : defaultAvatarSvg;
+                        
+                        if (tweetData.format === 'reply') {
+                            tweetCard.innerHTML = `<div class="reply-wrapper"><div class="reply-side-bar"><div class="reply-line-marker"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 9" width="14" height="9"><polyline points="1,7.5 7,1.5 13,7.5" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div></div><div class="reply-content"><div class="tweet-main"><div class="avatar" style="background-color: ${tweetData.avatarBgColor || 'var(--icon-blue)'};">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div></div></div>`;
+                        } else if (tweetData.format === 'retweet') {
+                            const retweetHeaderHtml = tweetData.retweeter ? `<div class="retweet-header">${retweetIconSvg} ${escapeHtml(tweetData.retweeter)}</div>` : '';
+                            tweetCard.innerHTML = retweetHeaderHtml + `<div class="tweet-main"><div class="avatar" style="background-color: ${tweetData.avatarBgColor || 'var(--icon-blue)'};">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div>`;
+                        } else {
+                            tweetCard.innerHTML = `<div class="tweet-main"><div class="avatar" style="background-color: ${tweetData.avatarBgColor || 'var(--icon-blue)'};">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div>`;
+                        }
+                        
+                        feed.appendChild(tweetCard);
+                    });
+                }
+                
+                // 重新附加事件和样式
+                attachAllCardsActions();
+                setRandomAvatarColors();
+                showToast('数据已加载');
+            } catch (error) {
+                console.error('加载数据失败:', error);
+                showToast('加载数据失败');
+            }
+        }
+        
+        function exportData() {
+            const savedData = localStorage.getItem('frulinkData');
+            if (!savedData) {
+                showToast('没有数据可导出');
+                return;
+            }
+            
+            try {
+                const data = JSON.parse(savedData);
+                const exportPayload = {
+                    ...data,
+                    characters: Array.isArray(characters) ? characters : []
+                };
+                const jsonString = JSON.stringify(exportPayload, null, 2);
+                const blob = new Blob([jsonString], { type: 'application/json' });
+                const url = URL.createObjectURL(blob);
+                const link = document.createElement('a');
+                const timestamp = new Date().toISOString().slice(0,19).replace(/:/g, '-');
+                const fileName = `frulink_data_${timestamp}.json`;
+                link.download = fileName;
+                link.href = url;
+                link.click();
+                URL.revokeObjectURL(url);
+                showToast(`数据已导出为 ${fileName}`);
+            } catch (error) {
+                console.error('导出数据失败:', error);
+                showToast('导出数据失败');
+            }
+        }
+        
+        function importData() {
+            const input = document.createElement('input');
+            input.type = 'file';
+            input.accept = '.json';
+            input.style.display = 'none';
+            
+            input.addEventListener('change', (e) => {
+                const file = e.target.files[0];
+                if (!file) return;
+                
+                const reader = new FileReader();
+                reader.onload = (event) => {
+                    try {
+                        const jsonString = event.target.result;
+                        const data = JSON.parse(jsonString);
+                        
+                        // 验证数据格式
+                        if (!data.topic || !Array.isArray(data.tweets)) {
+                            showToast('无效的数据格式');
+                            return;
+                        }
+                        
+                        localStorage.setItem('frulinkData', JSON.stringify(data));
+                        if (Array.isArray(data.characters)) {
+                            characters = data.characters;
+                        } else {
+                            // 兼容旧JSON：未提供characters时，避免残留旧人物数据
+                            characters = [];
+                        }
+                        saveCharacters();
+                        updateCharacterList();
+                        loadData();
+                        showToast('数据导入成功');
+                    } catch (error) {
+                        console.error('导入数据失败:', error);
+                        showToast('导入数据失败: 无效的JSON文件');
+                    }
+                };
+                
+                reader.onerror = () => {
+                    showToast('读取文件失败');
+                };
+                
+                reader.readAsText(file);
+            });
+            
+            document.body.appendChild(input);
+            input.click();
+            document.body.removeChild(input);
+        }
+        
+        // 编辑推文功能
+        let currentEditingCard = null;
+        
+        function editTweet(card) {
+            currentEditingCard = card;
+            const modal = document.getElementById('tweetEditModal');
+            
+            // 提取推文数据
+            const format = card.classList.contains('reply-format') ? 'reply' : (card.querySelector('.retweet-header') ? 'retweet' : 'normal');
+            const contentEl = card.querySelector('.tweet-text');
+            const metaEl = card.querySelector('.tweet-meta');
+            const actionsEl = card.querySelector('.tweet-actions');
+            
+            if (!contentEl || !metaEl || !actionsEl) return;
+            
+            // 填充表单
+            document.querySelector('input[name="editFormat"][value="' + format + '"]').checked = true;
+            toggleEditRetweetField();
+            
+            document.getElementById('editNickname').value = metaEl.querySelector('.author-name')?.innerText || '';
+            document.getElementById('editUserid').value = metaEl.querySelector('.author-id')?.innerText || '';
+            document.getElementById('editContent').value = contentEl.innerText || '';
+            document.getElementById('editTime').value = metaEl.querySelector('.time')?.innerText || '';
+            document.getElementById('editRetweets').value = actionsEl.querySelector('.action-item:nth-child(1)')?.innerText.replace(/[^0-9]/g, '') || '0';
+            document.getElementById('editLikes').value = actionsEl.querySelector('.action-item:nth-child(2)')?.innerText.replace(/[^0-9]/g, '') || '0';
+            
+            // 提取转发者信息
+            if (format === 'retweet') {
+                const retweetHeader = card.querySelector('.retweet-header');
+                if (retweetHeader) {
+                    document.getElementById('editRetweeter').value = retweetHeader.innerText.trim();
+                }
+            }
+            
+            // 提取并显示当前头像
+            const currentAvatar = card.querySelector('.avatar img');
+            if (currentAvatar) {
+                // 创建头像预览
+                const avatarPreview = document.createElement('img');
+                avatarPreview.src = currentAvatar.src;
+                avatarPreview.style.width = '50px';
+                avatarPreview.style.height = '50px';
+                avatarPreview.style.borderRadius = '50%';
+                avatarPreview.style.objectFit = 'cover';
+                avatarPreview.id = 'editAvatarPreview';
+                
+                // 移除旧的预览
+                const oldPreview = document.getElementById('editAvatarPreview');
+                if (oldPreview) {
+                    oldPreview.remove();
+                }
+                
+                // 添加新的预览
+                const avatarInput = document.getElementById('editAvatar-img');
+                avatarInput.parentNode.appendChild(avatarPreview);
+            }
+            
+            // 重置文件输入
+            document.getElementById('editAvatar-img').value = '';
+            document.getElementById('editTweet-img').value = '';
+            
+            // 显示模态框
+            modal.classList.add('active');
+        }
+        
+        function toggleEditRetweetField() {
+            const val = document.querySelector('input[name="editFormat"]:checked').value;
+            document.getElementById('editRetweeter-group').style.display = val === 'retweet' ? 'block' : 'none';
+        }
+        
+        function saveEditTweet() {
+            if (!currentEditingCard) return;
+            
+            const format = document.querySelector('input[name="editFormat"]:checked').value;
+            const retweeter = document.getElementById('editRetweeter').value;
+            const nickname = document.getElementById('editNickname').value;
+            const userid = document.getElementById('editUserid').value;
+            const content = document.getElementById('editContent').value;
+            const time = document.getElementById('editTime').value;
+            const retweets = document.getElementById('editRetweets').value;
+            const likes = document.getElementById('editLikes').value;
+            
+            // 记录操作前的历史
+            recordHistory('edit_tweet');
+            
+            // 处理图片
+            Promise.all([
+                (async () => {
+                    let avatarUrl = await getImageUrl(document.getElementById('editAvatar-img'));
+                    const avatarPreview = document.getElementById('editAvatarPreview');
+                    if (!avatarUrl && avatarPreview) {
+                        avatarUrl = avatarPreview.src;
+                    }
+                    return avatarUrl;
+                })(),
+                getImageUrl(document.getElementById('editTweet-img'))
+            ]).then(([avatarUrl, tweetImageUrl]) => {
+                // 重建推文HTML
+                const tweetCard = document.createElement('div');
+                tweetCard.className = 'tweet-card';
+                
+                if (format === 'reply') {
+                    tweetCard.classList.add('reply-format');
+                }
+                
+                const retweetIconSvg = `<svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>`;
+                const heartIconSvg = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+                const defaultAvatarSvg = `<svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+                
+                // 保留原头像如果没有上传新头像
+                const originalAvatar = currentEditingCard.querySelector('.avatar img');
+                const avatarHtml = avatarUrl ? `<img src="${avatarUrl}" style="width:100%; height:100%; object-fit:cover;">` : (originalAvatar ? `<img src="${originalAvatar.src}" style="width:100%; height:100%; object-fit:cover;">` : defaultAvatarSvg);
+                
+                // 保留原图片如果没有上传新图片
+                const originalTweetImg = currentEditingCard.querySelector('.tweet-image');
+                const tweetImgHtml = tweetImageUrl ? `<img src="${tweetImageUrl}" class="tweet-image">` : (originalTweetImg ? `<img src="${originalTweetImg.src}" class="tweet-image">` : '');
+                
+                if (format === 'reply') {
+                    tweetCard.innerHTML = `<div class="reply-wrapper"><div class="reply-side-bar"><div class="reply-line-marker"></div></div><div class="reply-content"><div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImgHtml}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div></div></div>`;
+                } else if (format === 'retweet') {
+                    const retweetHeaderHtml = retweeter ? `<div class="retweet-header">${retweetIconSvg} ${escapeHtml(retweeter)}</div>` : '';
+                    tweetCard.innerHTML = retweetHeaderHtml + `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImgHtml}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
+                } else {
+                    tweetCard.innerHTML = `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(nickname)}</div><div class="author-id">${escapeHtml(userid)}</div></div><div class="time">${escapeHtml(time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(content))}</div>${tweetImgHtml}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(likes)}</div></div></div></div>`;
+                }
+                
+                // 替换原卡片
+                currentEditingCard.parentNode.replaceChild(tweetCard, currentEditingCard);
+                
+                // 附加事件
+                attachCardActions(tweetCard);
+                setRandomAvatarColors();
+                
+                // 关闭模态框
+                closeEditModal();
+                
+                // 记录操作后的历史
+                recordHistory('edit_tweet_done');
+                showToast('推文已更新');
+            });
+        }
+        
+        function closeEditModal() {
+            const modal = document.getElementById('tweetEditModal');
+            modal.classList.remove('active');
+            currentEditingCard = null;
+        }
+        
+        // 人物数据管理
+        let characters = [];
+        
+        function saveCharacters() {
+            localStorage.setItem('frulinkCharacters', JSON.stringify(characters));
+        }
+        
+        function loadCharacters() {
+            const saved = localStorage.getItem('frulinkCharacters');
+            if (saved) {
+                try {
+                    characters = JSON.parse(saved);
+                } catch (error) {
+                    console.error('加载人物数据失败:', error);
+                }
+            }
+        }
+        
+        function addCharacter(name, userid, avatarUrl) {
+            const existingIndex = characters.findIndex(c => c.userid === userid);
+            if (existingIndex >= 0) {
+                characters[existingIndex] = { name, userid, avatarUrl };
+            } else {
+                characters.push({ name, userid, avatarUrl });
+            }
+            saveCharacters();
+            updateCharacterList();
+        }
+
+        function deleteCharacter(userid) {
+            const target = characters.find(c => c.userid === userid);
+            if (!target) return;
+
+            const shouldDelete = confirm(`确定删除人物「${target.name} (${target.userid})」吗？`);
+            if (!shouldDelete) return;
+
+            characters = characters.filter(c => c.userid !== userid);
+            saveCharacters();
+            updateCharacterList();
+            showToast('人物已删除');
+        }
+        
+        // 人物选择功能
+        let currentCharacterMode = 'add'; // 'add' 或 'edit'
+        
+        function openCharacterSelectModal(mode) {
+            currentCharacterMode = mode;
+            const modal = document.getElementById('characterSelectModal');
+            updateCharacterList();
+            modal.classList.add('active');
+        }
+        
+        function closeCharacterSelectModal() {
+            const modal = document.getElementById('characterSelectModal');
+            modal.classList.remove('active');
+        }
+        
+        function openCharacterEditModal() {
+            const modal = document.getElementById('characterEditModal');
+            // 重置表单
+            document.getElementById('characterName').value = '';
+            document.getElementById('characterUserid').value = '';
+            document.getElementById('characterAvatar-img').value = '';
+            modal.classList.add('active');
+        }
+        
+        function closeCharacterEditModal() {
+            const modal = document.getElementById('characterEditModal');
+            modal.classList.remove('active');
+        }
+        
+        function saveCharacter() {
+            const name = document.getElementById('characterName').value;
+            const userid = document.getElementById('characterUserid').value;
+            
+            if (!name || !userid) {
+                showToast('请填写所有必填字段');
+                return;
+            }
+            
+            getImageUrl(document.getElementById('characterAvatar-img')).then(avatarUrl => {
+                addCharacter(name, userid, avatarUrl);
+                closeCharacterEditModal();
+                closeCharacterSelectModal();
+                showToast('人物已保存');
+            });
+        }
+        
+        function selectCharacter(character) {
+            if (currentCharacterMode === 'add') {
+                document.getElementById('nickname').value = character.name;
+                document.getElementById('userid').value = character.userid;
+                // 设置头像预览
+                if (character.avatarUrl) {
+                    // 创建一个临时的图片预览
+                    const avatarPreview = document.createElement('img');
+                    avatarPreview.src = character.avatarUrl;
+                    avatarPreview.style.width = '50px';
+                    avatarPreview.style.height = '50px';
+                    avatarPreview.style.borderRadius = '50%';
+                    avatarPreview.style.objectFit = 'cover';
+                    avatarPreview.id = 'avatarPreview';
+                    
+                    // 移除旧的预览
+                    const oldPreview = document.getElementById('avatarPreview');
+                    if (oldPreview) {
+                        oldPreview.remove();
+                    }
+                    
+                    // 添加新的预览
+                    const avatarInput = document.getElementById('avatar-img');
+                    avatarInput.parentNode.appendChild(avatarPreview);
+                }
+            } else if (currentCharacterMode === 'edit') {
+                document.getElementById('editNickname').value = character.name;
+                document.getElementById('editUserid').value = character.userid;
+                // 设置头像预览
+                if (character.avatarUrl) {
+                    // 创建一个临时的图片预览
+                    const avatarPreview = document.createElement('img');
+                    avatarPreview.src = character.avatarUrl;
+                    avatarPreview.style.width = '50px';
+                    avatarPreview.style.height = '50px';
+                    avatarPreview.style.borderRadius = '50%';
+                    avatarPreview.style.objectFit = 'cover';
+                    avatarPreview.id = 'editAvatarPreview';
+                    
+                    // 移除旧的预览
+                    const oldPreview = document.getElementById('editAvatarPreview');
+                    if (oldPreview) {
+                        oldPreview.remove();
+                    }
+                    
+                    // 添加新的预览
+                    const avatarInput = document.getElementById('editAvatar-img');
+                    avatarInput.parentNode.appendChild(avatarPreview);
+                }
+            }
+            closeCharacterSelectModal();
+            showToast(`已选择人物: ${character.name}`);
+        }
+        
+        function updateCharacterList() {
+            const list = document.getElementById('characterList');
+            if (!list) return;
+            
+            if (characters.length === 0) {
+                list.innerHTML = '<div style="text-align: center; color: var(--text-light);">暂无保存的人物</div>';
+                return;
+            }
+            
+            list.innerHTML = '';
+            characters.forEach(character => {
+                const characterItem = document.createElement('div');
+                characterItem.style.display = 'flex';
+                characterItem.style.alignItems = 'center';
+                characterItem.style.justifyContent = 'space-between';
+                characterItem.style.gap = '10px';
+                characterItem.style.padding = '10px';
+                characterItem.style.borderBottom = '1px solid var(--border-color)';
+                characterItem.style.cursor = 'pointer';
+                characterItem.style.transition = 'background-color 0.2s';
+                characterItem.onmouseover = () => { characterItem.style.backgroundColor = 'var(--bg-gray)'; };
+                characterItem.onmouseout = () => { characterItem.style.backgroundColor = 'transparent'; };
+                characterItem.onclick = () => { selectCharacter(character); };
+                
+                const avatarHtml = character.avatarUrl ? 
+                    `<img src="${character.avatarUrl}" style="width: 40px; height: 40px; border-radius: 50%; object-fit: cover; margin-right: 10px;">` : 
+                    `<div style="width: 40px; height: 40px; border-radius: 50%; background: var(--icon-blue); display: flex; align-items: center; justify-content: center; margin-right: 10px; color: white;">${character.name[0]}</div>`;
+                
+                const infoWrap = document.createElement('div');
+                infoWrap.style.display = 'flex';
+                infoWrap.style.alignItems = 'center';
+                infoWrap.style.flex = '1';
+                infoWrap.style.minWidth = '0';
+                infoWrap.innerHTML = `
+                    ${avatarHtml}
+                    <div style="min-width: 0;">
+                        <div style="font-weight: bold; word-break: break-word;">${escapeHtml(character.name)}</div>
+                        <div style="color: var(--text-light); font-size: 14px; word-break: break-word;">${escapeHtml(character.userid)}</div>
+                    </div>
+                `;
+
+                const deleteBtn = document.createElement('button');
+                deleteBtn.type = 'button';
+                deleteBtn.className = 'cancel-btn';
+                deleteBtn.textContent = '删除';
+                deleteBtn.style.padding = '4px 10px';
+                deleteBtn.style.fontSize = '12px';
+                deleteBtn.style.flexShrink = '0';
+                deleteBtn.onclick = (e) => {
+                    e.stopPropagation();
+                    deleteCharacter(character.userid);
+                };
+                
+                characterItem.appendChild(infoWrap);
+                characterItem.appendChild(deleteBtn);
+                list.appendChild(characterItem);
+            });
+        }
+        
+        // 富文本编辑功能
+        function insertMarkdown(prefix, suffix, placeholder, textareaId = 'content') {
+            const textarea = document.getElementById(textareaId);
+            if (!textarea) return;
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const replacement = prefix + (selectedText || placeholder) + suffix;
+            
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            textarea.focus();
+            
+            // 设置光标位置
+            const newCursorPosition = start + prefix.length + (selectedText || placeholder).length;
+            textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+        }
+        
+        // 增强的markdown解析函数
+        function parseMarkdown(text) {
+            if (!text) return '';
+            
+            // 处理粗体
+            text = text.replace(/\*\*(.*?)\*\*/g, '<strong>$1</strong>');
+            // 处理斜体
+            text = text.replace(/\*(.*?)\*/g, '<em>$1</em>');
+            // 处理删除线
+            text = text.replace(/~~(.*?)~~/g, '<del>$1</del>');
+            // 处理自定义颜色文字
+            text = text.replace(/\[color=(.*?)\](.*?)\[\/color\]/g, '<span style="color: $1;">$2</span>');
+            // 处理蓝色文字（向后兼容）
+            text = text.replace(/\[blue\](.*?)\[\/blue\]/g, '<span style="color: var(--text-blue);">$1</span>');
+            // 处理标题
+            text = text.replace(/^# (.*$)/gim, '<h3 style="margin: 10px 0;">$1</h3>');
+            // 处理列表
+            text = text.replace(/^- (.*$)/gim, '<li style="margin-left: 20px;">$1</li>');
+            // 处理代码块
+            text = text.replace(/```([\s\S]*?)```/g, '<pre style="background: #f0f0f0; padding: 10px; border-radius: 4px; font-family: monospace;">$1</pre>');
+            // 处理链接
+            text = text.replace(/\[(.*?)\]\((.*?)\)/g, '<a href="$2" target="_blank" style="color: var(--text-blue); text-decoration: underline;">$1</a>');
+            // 处理图片
+            text = text.replace(/!\[(.*?)\]\((.*?)\)/g, '<img src="$2" alt="$1" style="max-width: 100%; border-radius: 8px;">');
+            // 处理换行
+            text = text.replace(/\n/g, '<br>');
+            
+            return text;
+        }
+        
+        // 表情符号功能
+        let currentTextareaId = 'content';
+        
+        const emojis = [
+            '😊', '😂', '❤️', '👍', '🎉', '🤔', '😢', '😡',
+            '😍', '🤣', '🔥', '👀', '💯', '👏', '✨', '🌟',
+            '🤗', '🤫', '🤭', '🤔', '😎', '🤩', '🥳', '😇',
+            '😅', '😆', '😋', '😌', '😏', '😒', '😓', '😔',
+            '😖', '😣', '😤', '😢', '😭', '😠', '😡', '😳',
+            '😷', '🤒', '🤕', '🤢', '🤮', '🤧', '🥵', '🥶',
+            '🥺', '😰', '😱', '😨', '😴', '🤔', '🤥', '🤫',
+            '🤭', '🤮', '🤢', '🤧', '🥵', '🥶', '🥺', '😰'
+        ];
+        
+        function openEmojiPicker(textareaId) {
+            currentTextareaId = textareaId;
+            const modal = document.getElementById('emojiPickerModal');
+            const emojiGrid = document.getElementById('emojiGrid');
+            
+            // 清空表情网格
+            emojiGrid.innerHTML = '';
+            
+            // 生成表情按钮
+            emojis.forEach(emoji => {
+                const emojiBtn = document.createElement('button');
+                emojiBtn.style.width = '30px';
+                emojiBtn.style.height = '30px';
+                emojiBtn.style.border = '1px solid var(--border-color)';
+                emojiBtn.style.borderRadius = '4px';
+                emojiBtn.style.background = 'white';
+                emojiBtn.style.cursor = 'pointer';
+                emojiBtn.style.fontSize = '20px';
+                emojiBtn.style.display = 'flex';
+                emojiBtn.style.alignItems = 'center';
+                emojiBtn.style.justifyContent = 'center';
+                emojiBtn.style.transition = 'all 0.2s';
+                emojiBtn.innerHTML = emoji;
+                emojiBtn.onclick = () => insertEmoji(emoji);
+                emojiBtn.onmouseover = () => {
+                    emojiBtn.style.background = 'var(--bg-blue)';
+                    emojiBtn.style.transform = 'scale(1.1)';
+                };
+                emojiBtn.onmouseout = () => {
+                    emojiBtn.style.background = 'white';
+                    emojiBtn.style.transform = 'scale(1)';
+                };
+                emojiGrid.appendChild(emojiBtn);
+            });
+            
+            // 显示模态框
+            modal.classList.add('active');
+        }
+        
+        function insertEmoji(emoji) {
+            const textarea = document.getElementById(currentTextareaId);
+            if (!textarea) return;
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const textBefore = textarea.value.substring(0, start);
+            const textAfter = textarea.value.substring(end);
+            
+            textarea.value = textBefore + emoji + textAfter;
+            textarea.focus();
+            
+            // 设置光标位置
+            const newCursorPosition = start + emoji.length;
+            textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+            
+            // 关闭表情选择器
+            closeEmojiPicker();
+        }
+        
+        function closeEmojiPicker() {
+            const modal = document.getElementById('emojiPickerModal');
+            modal.classList.remove('active');
+        }
+        
+        // @用户功能
+        let currentAtTextareaId = 'content';
+        
+        function setupAtUserAutoComplete() {
+            // 为添加推文的文本框添加事件监听
+            const contentTextarea = document.getElementById('content');
+            if (contentTextarea) {
+                contentTextarea.addEventListener('input', (e) => handleAtUserInput(e, 'content'));
+                contentTextarea.addEventListener('click', (e) => handleAtUserInput(e, 'content'));
+                contentTextarea.addEventListener('keydown', (e) => handleAtUserKeydown(e, 'content'));
+            }
+            
+            // 为编辑模态框的文本框添加事件监听
+            const editContentTextarea = document.getElementById('editContent');
+            if (editContentTextarea) {
+                editContentTextarea.addEventListener('input', (e) => handleAtUserInput(e, 'editContent'));
+                editContentTextarea.addEventListener('click', (e) => handleAtUserInput(e, 'editContent'));
+                editContentTextarea.addEventListener('keydown', (e) => handleAtUserKeydown(e, 'editContent'));
+            }
+            
+            // 点击其他地方关闭建议
+            document.addEventListener('click', (e) => {
+                const suggestions = document.getElementById('atUserSuggestions');
+                const contentTextarea = document.getElementById('content');
+                const editContentTextarea = document.getElementById('editContent');
+                
+                if (suggestions && e.target !== suggestions && e.target !== contentTextarea && e.target !== editContentTextarea) {
+                    suggestions.style.display = 'none';
+                }
+            });
+        }
+        
+        function handleAtUserInput(e, textareaId) {
+            const textarea = document.getElementById(textareaId);
+            if (!textarea) return;
+            
+            const cursorPosition = textarea.selectionStart;
+            const text = textarea.value;
+            const textBeforeCursor = text.substring(0, cursorPosition);
+            
+            // 查找@符号的位置
+            const atIndex = textBeforeCursor.lastIndexOf('@');
+            if (atIndex === -1) {
+                hideAtUserSuggestions();
+                return;
+            }
+            
+            // 检查@符号是否是有效的（前面是空格或开头）
+            const charBeforeAt = atIndex > 0 ? textBeforeCursor[atIndex - 1] : ' ';
+            if (!/\s|^/.test(charBeforeAt)) {
+                hideAtUserSuggestions();
+                return;
+            }
+            
+            // 提取@后面的文本
+            const query = textBeforeCursor.substring(atIndex + 1).trim();
+            currentAtTextareaId = textareaId;
+            
+            // 显示用户建议
+            showAtUserSuggestions(query, textarea);
+        }
+        
+        function handleAtUserKeydown(e, textareaId) {
+            const suggestions = document.getElementById('atUserSuggestions');
+            if (!suggestions || suggestions.style.display === 'none') return;
+            
+            const suggestionItems = suggestions.querySelectorAll('.suggestion-item');
+            if (suggestionItems.length === 0) return;
+            
+            let activeIndex = -1;
+            suggestionItems.forEach((item, index) => {
+                if (item.classList.contains('active')) {
+                    activeIndex = index;
+                }
+            });
+            
+            switch (e.key) {
+                case 'ArrowDown':
+                    e.preventDefault();
+                    if (activeIndex < suggestionItems.length - 1) {
+                        if (activeIndex >= 0) {
+                            suggestionItems[activeIndex].classList.remove('active');
+                        }
+                        suggestionItems[activeIndex + 1].classList.add('active');
+                        suggestionItems[activeIndex + 1].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                    break;
+                case 'ArrowUp':
+                    e.preventDefault();
+                    if (activeIndex > 0) {
+                        suggestionItems[activeIndex].classList.remove('active');
+                        suggestionItems[activeIndex - 1].classList.add('active');
+                        suggestionItems[activeIndex - 1].scrollIntoView({ behavior: 'smooth', block: 'nearest' });
+                    }
+                    break;
+                case 'Enter':
+                    e.preventDefault();
+                    if (activeIndex >= 0) {
+                        selectAtUserSuggestion(suggestionItems[activeIndex]);
+                    }
+                    break;
+                case 'Escape':
+                    hideAtUserSuggestions();
+                    break;
+            }
+        }
+        
+        function showAtUserSuggestions(query, textarea) {
+            const suggestions = document.getElementById('atUserSuggestions');
+            if (!suggestions) return;
+            
+            // 获取用户列表（从人物数据中获取）
+            const users = characters.map(c => ({
+                name: c.name,
+                userid: c.userid
+            }));
+            
+            // 添加一些默认用户
+            const defaultUsers = [
+                { name: '超天才清楚系病弱美少女黑客', userid: '@Akeboshi_himari' },
+                { name: '明星日鞠', userid: '@Hoshino_himari' },
+                { name: '天童爱丽丝', userid: '@Tendo_alice' },
+                { name: '若藻', userid: '@Wakaba' },
+                { name: '蔚蓝档案官方', userid: '@BlueArchive' }
+            ];
+            
+            const allUsers = [...users, ...defaultUsers];
+            
+            // 过滤用户
+            const filteredUsers = allUsers.filter(user => {
+                const nameMatch = user.name.toLowerCase().includes(query.toLowerCase());
+                const idMatch = user.userid.toLowerCase().includes(query.toLowerCase());
+                return nameMatch || idMatch;
+            });
+            
+            if (filteredUsers.length === 0) {
+                hideAtUserSuggestions();
+                return;
+            }
+            
+            // 生成建议列表
+            suggestions.innerHTML = '';
+            filteredUsers.forEach((user, index) => {
+                const suggestionItem = document.createElement('div');
+                suggestionItem.className = 'suggestion-item' + (index === 0 ? ' active' : '');
+                suggestionItem.style.padding = '10px';
+                suggestionItem.style.cursor = 'pointer';
+                suggestionItem.style.borderBottom = '1px solid var(--border-color)';
+                suggestionItem.style.transition = 'background-color 0.2s';
+                suggestionItem.innerHTML = `
+                    <div style="font-weight: bold;">${escapeHtml(user.name)}</div>
+                    <div style="color: var(--text-light); font-size: 14px;">${escapeHtml(user.userid)}</div>
+                `;
+                suggestionItem.onmouseover = () => {
+                    const allItems = suggestions.querySelectorAll('.suggestion-item');
+                    allItems.forEach(item => item.classList.remove('active'));
+                    suggestionItem.classList.add('active');
+                };
+                suggestionItem.onclick = () => selectAtUserSuggestion(suggestionItem);
+                suggestions.appendChild(suggestionItem);
+            });
+            
+            // 计算位置并显示
+            const rect = textarea.getBoundingClientRect();
+            const scrollTop = window.pageYOffset || document.documentElement.scrollTop;
+            const scrollLeft = window.pageXOffset || document.documentElement.scrollLeft;
+            
+            suggestions.style.display = 'block';
+            suggestions.style.left = `${rect.left + scrollLeft}px`;
+            suggestions.style.top = `${rect.bottom + scrollTop + 5}px`;
+            suggestions.style.width = `${rect.width}px`;
+        }
+        
+        function selectAtUserSuggestion(suggestionItem) {
+            const textarea = document.getElementById(currentAtTextareaId);
+            if (!textarea) return;
+            
+            const userid = suggestionItem.querySelector('div:nth-child(2)').innerText;
+            
+            const cursorPosition = textarea.selectionStart;
+            const text = textarea.value;
+            const textBeforeCursor = text.substring(0, cursorPosition);
+            const atIndex = textBeforeCursor.lastIndexOf('@');
+            
+            if (atIndex === -1) return;
+            
+            // 替换@后的文本
+            const newText = text.substring(0, atIndex) + userid + ' ' + text.substring(cursorPosition);
+            textarea.value = newText;
+            
+            // 设置光标位置
+            const newCursorPosition = atIndex + userid.length + 1;
+            textarea.focus();
+            textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+            
+            // 隐藏建议
+            hideAtUserSuggestions();
+        }
+        
+        function hideAtUserSuggestions() {
+            const suggestions = document.getElementById('atUserSuggestions');
+            if (suggestions) {
+                suggestions.style.display = 'none';
+            }
+        }
+        
+        // 颜色选择器功能
+        let currentColorTextareaId = 'content';
+        
+        function openColorPicker(textareaId) {
+            currentColorTextareaId = textareaId;
+            const modal = document.getElementById('colorPickerModal');
+            const colorInput = document.getElementById('colorInput');
+            const rgbValue = document.getElementById('rgbValue');
+            
+            // 设置默认颜色
+            colorInput.value = '#3498db';
+            updateRGBValue('#3498db');
+            
+            // 显示模态框
+            modal.classList.add('active');
+        }
+        
+        function updateRGBValue(hex) {
+            const rgbValue = document.getElementById('rgbValue');
+            if (!rgbValue) return;
+            
+            // 将十六进制颜色转换为RGB
+            const r = parseInt(hex.slice(1, 3), 16);
+            const g = parseInt(hex.slice(3, 5), 16);
+            const b = parseInt(hex.slice(5, 7), 16);
+            rgbValue.value = `rgb(${r}, ${g}, ${b})`;
+        }
+        
+        function closeColorPicker() {
+            const modal = document.getElementById('colorPickerModal');
+            modal.classList.remove('active');
+        }
+        
+        function applyColor() {
+            const colorInput = document.getElementById('colorInput');
+            const rgbValue = document.getElementById('rgbValue');
+            const color = rgbValue.value;
+            
+            // 插入带颜色的文本
+            const textarea = document.getElementById(currentColorTextareaId);
+            if (!textarea) return;
+            
+            const start = textarea.selectionStart;
+            const end = textarea.selectionEnd;
+            const selectedText = textarea.value.substring(start, end);
+            const replacement = `[color=${color}]${selectedText || '彩色文字'}[/color]`;
+            
+            textarea.value = textarea.value.substring(0, start) + replacement + textarea.value.substring(end);
+            textarea.focus();
+            
+            // 设置光标位置
+            const newCursorPosition = start + `[color=${color}]`.length + (selectedText || '彩色文字').length;
+            textarea.setSelectionRange(newCursorPosition, newCursorPosition);
+            
+            // 关闭颜色选择器
+            closeColorPicker();
+        }
+        
+        // 操作历史记录系统
+        let history = [];
+        let historyIndex = -1;
+        const MAX_HISTORY = 50;
+        
+        function recordHistory(action) {
+            // 移除当前索引之后的历史记录
+            if (historyIndex < history.length - 1) {
+                history = history.slice(0, historyIndex + 1);
+            }
+            
+            // 记录当前状态
+            const currentState = {
+                topic: {
+                    title: document.getElementById('topicTitle').innerText.replace('编辑','').trim(),
+                    desc: document.getElementById('topicDesc').innerText
+                },
+                tweets: []
+            };
+            
+            document.querySelectorAll('.tweet-card').forEach(card => {
+                const format = card.classList.contains('reply-format') ? 'reply' : (card.querySelector('.retweet-header') ? 'retweet' : 'normal');
+                const contentEl = card.querySelector('.tweet-text');
+                const metaEl = card.querySelector('.tweet-meta');
+                const actionsEl = card.querySelector('.tweet-actions');
+                
+                if (!contentEl || !metaEl || !actionsEl) return;
+                
+                const tweet = {
+                    format: format,
+                    nickname: metaEl.querySelector('.author-name')?.innerText || '',
+                    userid: metaEl.querySelector('.author-id')?.innerText || '',
+                    content: contentEl.innerText || '',
+                    time: metaEl.querySelector('.time')?.innerText || '',
+                    retweets: actionsEl.querySelector('.action-item:nth-child(1)')?.innerText.replace(/[^0-9]/g, '') || '0',
+                    likes: actionsEl.querySelector('.action-item:nth-child(2)')?.innerText.replace(/[^0-9]/g, '') || '0'
+                };
+                
+                // 提取头像和图片的base64数据
+                const avatarImg = card.querySelector('.avatar img');
+                if (avatarImg) {
+                    tweet.avatarUrl = avatarImg.src;
+                }
+                
+                const tweetImg = card.querySelector('.tweet-image');
+                if (tweetImg) {
+                    tweet.tweetImageUrl = tweetImg.src;
+                }
+                
+                // 提取转发者信息
+                if (format === 'retweet') {
+                    const retweetHeader = card.querySelector('.retweet-header');
+                    if (retweetHeader) {
+                        tweet.retweeter = retweetHeader.innerText.trim();
+                    }
+                }
+                
+                currentState.tweets.push(tweet);
+            });
+            
+            history.push({
+                action: action,
+                state: currentState
+            });
+            
+            // 限制历史记录数量
+            if (history.length > MAX_HISTORY) {
+                history.shift();
+            } else {
+                historyIndex++;
+            }
+            
+            updateUndoRedoButtons();
+        }
+        
+        function undo() {
+            if (historyIndex > 0) {
+                historyIndex--;
+                restoreState(history[historyIndex].state);
+                showToast('已撤销操作');
+                updateUndoRedoButtons();
+            }
+        }
+        
+        function redo() {
+            if (historyIndex < history.length - 1) {
+                historyIndex++;
+                restoreState(history[historyIndex].state);
+                showToast('已恢复操作');
+                updateUndoRedoButtons();
+            }
+        }
+        
+        function restoreState(state) {
+            // 加载话题信息
+            if (state.topic) {
+                const topicTitleEl = document.getElementById('topicTitle');
+                const topicDescEl = document.getElementById('topicDesc');
+                if (topicTitleEl && topicDescEl) {
+                    topicTitleEl.innerHTML = `${escapeHtml(state.topic.title)} <span class="edit-icon" id="editTopicBtn" title="编辑话题"><svg viewBox="0 0 24 24" stroke="currentColor" fill="none" stroke-width="2"><path d="M17 3L21 7L7 21H3V17L17 3Z"/><path d="M15 5L19 9"/></svg>编辑</span>`;
+                    topicDescEl.innerText = state.topic.desc || '';
+                    document.getElementById('editTopicBtn')?.addEventListener('click', openEditModal);
+                }
+            }
+            
+            // 清空现有推文
+            const feed = document.getElementById('feed');
+            if (feed) {
+                feed.innerHTML = '';
+            }
+            
+            // 加载推文
+            if (state.tweets && Array.isArray(state.tweets)) {
+                state.tweets.forEach(tweetData => {
+                    const tweetCard = document.createElement('div');
+                    tweetCard.className = 'tweet-card';
+                    
+                    if (tweetData.format === 'reply') {
+                        tweetCard.classList.add('reply-format');
+                    }
+                    
+                    const retweetIconSvg = `<svg viewBox="0 0 24 24"><path d="M19 8l-4 4h3c0 3.31-2.69 6-6 6-1.01 0-1.97-.25-2.8-.7l-1.46 1.46C8.97 19.54 10.43 20 12 20c4.42 0 8-3.58 8-8h3l-4-4zM6 12c0-3.31 2.69-6 6-6 1.01 0 1.97.25 2.8.7l1.46-1.46C15.03 4.46 13.57 4 12 4c-4.42 0-8 3.58-8 8H1l4 4 4-4H6z"/></svg>`;
+                    const heartIconSvg = `<svg viewBox="0 0 24 24"><path d="M12 21.35l-1.45-1.32C5.4 15.36 2 12.28 2 8.5 2 5.42 4.42 3 7.5 3c1.74 0 3.41.81 4.5 2.09C13.09 3.81 14.76 3 16.5 3 19.58 3 22 5.42 22 8.5c0 3.78-3.4 6.86-8.55 11.54L12 21.35z" fill="none" stroke="currentColor" stroke-width="2"/></svg>`;
+                    const defaultAvatarSvg = `<svg viewBox="0 0 24 24" width="30" height="30" fill="white"><path d="M12 12c2.21 0 4-1.79 4-4s-1.79-4-4-4-4 1.79-4 4 1.79 4 4 4zm0 2c-2.67 0-8 1.34-8 4v2h16v-2c0-2.66-5.33-4-8-4z"/></svg>`;
+                    const avatarHtml = tweetData.avatarUrl ? `<img src="${tweetData.avatarUrl}" style="width:100%; height:100%; object-fit:cover;">` : defaultAvatarSvg;
+                    
+                    if (tweetData.format === 'reply') {
+                        tweetCard.innerHTML = `<div class="reply-wrapper"><div class="reply-side-bar"><div class="reply-line-marker"><svg xmlns="http://www.w3.org/2000/svg" viewBox="0 0 14 9" width="14" height="9"><polyline points="1,7.5 7,1.5 13,7.5" fill="none" stroke="#555555" stroke-width="2" stroke-linecap="round" stroke-linejoin="round" /></svg></div></div><div class="reply-content"><div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div></div></div>`;
+                    } else if (tweetData.format === 'retweet') {
+                        const retweetHeaderHtml = tweetData.retweeter ? `<div class="retweet-header">${retweetIconSvg} ${escapeHtml(tweetData.retweeter)}</div>` : '';
+                        tweetCard.innerHTML = retweetHeaderHtml + `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div>`;
+                    } else {
+                        tweetCard.innerHTML = `<div class="tweet-main"><div class="avatar">${avatarHtml}</div><div class="tweet-content"><div class="tweet-meta"><div><div class="author-name">${escapeHtml(tweetData.nickname)}</div><div class="author-id">${escapeHtml(tweetData.userid)}</div></div><div class="time">${escapeHtml(tweetData.time)}</div></div><div class="tweet-text">${parseMarkdown(escapeHtml(tweetData.content))}</div>${tweetData.tweetImageUrl ? `<img src="${tweetData.tweetImageUrl}" class="tweet-image">` : ''}<div class="tweet-actions"><div class="action-item">${retweetIconSvg} ${escapeHtml(tweetData.retweets)}</div><div class="action-item">${heartIconSvg} ${escapeHtml(tweetData.likes)}</div></div></div></div>`;
+                    }
+                    
+                    feed.appendChild(tweetCard);
+                });
+            }
+            
+            // 重新附加事件和样式
+            attachAllCardsActions();
+            setRandomAvatarColors();
+        }
+        
+        function updateUndoRedoButtons() {
+            const undoBtn = document.getElementById('undoBtn');
+            const redoBtn = document.getElementById('redoBtn');
+            
+            if (undoBtn) {
+                undoBtn.disabled = historyIndex <= 0;
+                undoBtn.style.opacity = historyIndex <= 0 ? '0.5' : '1';
+            }
+            
+            if (redoBtn) {
+                redoBtn.disabled = historyIndex >= history.length - 1;
+                redoBtn.style.opacity = historyIndex >= history.length - 1 ? '0.5' : '1';
+            }
+        }
+        
+        // 自动保存功能
+        let autoSaveTimer;
+        function setupAutoSave() {
+            // 监听推文添加、删除、修改等操作
+            const feed = document.getElementById('feed');
+            if (feed) {
+                // 使用MutationObserver监听DOM变化
+                const observer = new MutationObserver(() => {
+                    // 清除之前的定时器
+                    clearTimeout(autoSaveTimer);
+                    // 设置新的定时器，3秒后自动保存
+                    autoSaveTimer = setTimeout(() => {
+                        saveData();
+                    }, 3000);
+                });
+                
+                observer.observe(feed, {
+                    childList: true,
+                    subtree: true
+                });
+            }
+        }
         const topicTitleEl = document.getElementById('topicTitle'), topicDescEl = document.getElementById('topicDesc'), modal = document.getElementById('topicModal'), modalTitle = document.getElementById('modalTopicTitle'), modalDesc = document.getElementById('modalTopicDesc'), saveTopicBtn = document.getElementById('saveTopicBtn'), cancelModalBtn = document.getElementById('cancelModalBtn'), editTopicBtn = document.getElementById('editTopicBtn');
         function openEditModal() { let rawTitle = topicTitleEl.innerText.replace('编辑','').trim(); modalTitle.value = rawTitle; modalDesc.value = topicDescEl.innerText; modal.classList.add('active'); }
         function closeModal() { modal.classList.remove('active'); }
@@ -1129,12 +2777,72 @@
             window.addTweet = addTweet; window.toggleRetweetField = toggleRetweetField;
             const fullCaptureBtn = document.getElementById('fullScreenCaptureBtn');
             if(fullCaptureBtn) fullCaptureBtn.addEventListener('click', captureFullFruLink);
+            
+            // 编辑模态框事件
+            document.getElementById('cancelEditModalBtn')?.addEventListener('click', closeEditModal);
+            document.getElementById('saveEditTweetBtn')?.addEventListener('click', saveEditTweet);
+            document.querySelectorAll('input[name="editFormat"]').forEach(radio => {
+                radio.addEventListener('change', toggleEditRetweetField);
+            });
+            
+            // 人物选择相关事件
+            document.getElementById('characterSelectBtn')?.addEventListener('click', () => openCharacterSelectModal('add'));
+            document.getElementById('cancelCharacterSelectBtn')?.addEventListener('click', closeCharacterSelectModal);
+            document.getElementById('addNewCharacterBtn')?.addEventListener('click', openCharacterEditModal);
+            document.getElementById('cancelCharacterEditBtn')?.addEventListener('click', closeCharacterEditModal);
+            document.getElementById('saveCharacterBtn')?.addEventListener('click', saveCharacter);
+            document.getElementById('cancelEmojiPickerBtn')?.addEventListener('click', closeEmojiPicker);
+            
+            // 颜色选择器相关事件
+            const colorInput = document.getElementById('colorInput');
+            const rgbValue = document.getElementById('rgbValue');
+            if (colorInput) {
+                colorInput.addEventListener('input', function() {
+                    updateRGBValue(this.value);
+                });
+            }
+            if (rgbValue) {
+                rgbValue.addEventListener('input', function() {
+                    // 简单验证RGB格式
+                    const rgbPattern = /^rgb\(\s*\d+\s*,\s*\d+\s*,\s*\d+\s*\)$/;
+                    if (rgbPattern.test(this.value)) {
+                        // 将RGB转换为十六进制
+                        const rgb = this.value.match(/\d+/g);
+                        if (rgb && rgb.length === 3) {
+                            const hex = rgb.map(num => {
+                                const hex = parseInt(num).toString(16);
+                                return hex.length === 1 ? '0' + hex : hex;
+                            }).join('');
+                            document.getElementById('colorInput').value = '#' + hex;
+                        }
+                    }
+                });
+            }
+            document.getElementById('cancelColorPickerBtn')?.addEventListener('click', closeColorPicker);
+            document.getElementById('confirmColorBtn')?.addEventListener('click', applyColor);
+            
+            // 为feed添加拖放事件监听器
+            const feed = document.getElementById('feed');
+            if (feed) {
+                feed.addEventListener('dragover', handleDragOver);
+                feed.addEventListener('drop', handleDrop);
+            }
+            
+            // 加载保存的数据
+            loadData();
+            // 加载保存的人物数据
+            loadCharacters();
+            // 设置自动保存
+            setupAutoSave();
+            // 初始化@用户自动补全功能
+            setupAtUserAutoComplete();
+            
+            // 暴露数据管理函数到全局
+            window.saveData = saveData;
+            window.loadData = loadData;
+            window.exportData = exportData;
+            window.importData = importData;
         });
     </script>
-    <footer style="text-align: center; font-size: 12px; color: #666; margin-top: 20px;">
-        <p>本工具仅供学习交流，资源版权归《蔚蓝档案》官方所有</p>
-        <p> NEXON Games & Yostar | Fan-made Project</p>
-    </footer>
 </body>
 </html>
-
