@@ -850,7 +850,16 @@
                 margin: 0 auto !important;
             }
 
-            .screenshot-mode .card-actions-group {
+            /* 强制恢复 tweet-meta 为水平排列 */
+            .screenshot-mode .tweet-meta {
+                flex-direction: row !important;
+                justify-content: space-between !important;
+                align-items: center !important;
+            }
+
+            /* 截图时强制隐藏所有操作按钮组 */
+            .screenshot-mode .card-actions-group,
+            .screenshot-mode .move-selector {
                 display: none !important;
             }
         }
