@@ -73,6 +73,7 @@
             position: relative;
             transition: all 0.2s;
             flex-shrink: 0;
+            overflow: hidden;
         }
 
         .header {
@@ -471,6 +472,33 @@
             color: var(--icon-blue);
             font-size: 14px;
         }
+
+        /* 截图模式 - 强制使用桌面版样式 */
+        .screenshot-mode {
+            width: 800px !important;
+            min-width: 800px !important;
+            max-width: 800px !important;
+            margin: 0 auto !important;
+        }
+
+        .screenshot-mode .card-actions-group {
+            opacity: 1 !important;
+            transform: translateY(0) !important;
+            display: flex !important;
+        }
+
+        .screenshot-mode .edit-icon {
+            opacity: 1 !important;
+        }
+
+        /* 确保所有推文卡片内的按钮组都可见 */
+        .screenshot-mode .tweet-card .card-actions-group {
+            opacity: 1 !important;
+            position: absolute !important;
+            top: 12px !important;
+            right: 12px !important;
+        }
+
         .action-item {
             display: flex;
             align-items: center;
@@ -814,33 +842,16 @@
                 gap: 8px;
             }
             
-            /* 编辑模态框适配 */
-            .edit-modal {
-                width: 95% !important;
-                max-width: 400px;
-                padding: 15px;
+            /* 截图模式 - 强制使用桌面版样式 */
+            .screenshot-mode {
+                width: 800px !important;
+                min-width: 800px !important;
+                max-width: 800px !important;
+                margin: 0 auto !important;
             }
-            
-            .edit-modal h3 {
-                font-size: 16px;
-                margin-bottom: 15px;
-            }
-            
-            /* 颜色选择器适配 */
-            #colorPickerModal .edit-modal {
-                width: 90% !important;
-                max-width: 300px;
-            }
-            
-            /* 表情选择器适配 */
-            #emojiPickerModal .edit-modal {
-                width: 90% !important;
-                max-width: 300px;
-            }
-            
-            #emojiGrid {
-                grid-template-columns: repeat(6, 1fr) !important;
-                gap: 8px !important;
+
+            .screenshot-mode .card-actions-group {
+                display: none !important;
             }
         }
         
@@ -1041,7 +1052,7 @@
         }
         .move-selector {
             position: absolute;
-            top: 45px;
+            top: -10px;
             right: 0;
             background: white;
             border-radius: 16px;
@@ -1189,6 +1200,7 @@
 <div id="toastMsg" class="toast-msg"></div>
 
 <script>
+    
         function escapeHtml(str) { if (!str) return ''; return str.replace(/[&<>]/g, m => m==='&'?'&amp;':m==='<'?'&lt;':'&gt;'); }
         function showToast(msg, duration=2200) {
             const toast = document.getElementById('toastMsg');
@@ -1200,13 +1212,15 @@
         async function captureFullFruLink() {
             const container = document.getElementById('frulinkContainer');
             if (!container) return;
+            container.classList.add('screenshot-mode');
             
             try {
                 showToast("正在截取完整界面，请稍后...");
                 
                 const originalScrollTop = container.scrollTop;
+                await new Promise(r => setTimeout(r, 50));
                 
-                const allActionGroups = container.querySelectorAll('.card-actions-group, .move-selector, .global-screenshot-btn');
+                const allActionGroups = container.querySelectorAll('.card-actions-group, .move-selector, .move-wrapper, .action-btn, .edit-btn, .screenshot-btn, .delete-btn, .move-btn, .global-screenshot-btn');
                 const originalDisplays = [];
                 allActionGroups.forEach((el, idx) => {
                     originalDisplays[idx] = el.style.display;
@@ -1379,13 +1393,20 @@
             } catch (err) {
                 console.error("完整截图失败", err);
                 showToast("完整截图失败: " + (err.message || "请检查网络或图片资源"));
+            }finally{
+                container.classList.remove('screenshot-mode');
             }
         }
         async function captureTweetAsImage(tweetCardElement) {
             if (!tweetCardElement) return;
+            const container = document.getElementById('frulinkContainer');
             try {
                 showToast("正在准备截图...");
-                const actionGroups = tweetCardElement.querySelectorAll('.card-actions-group, .move-selector');
+
+                if (container) container.classList.add('screenshot-mode');
+                await new Promise(r => setTimeout(r, 50));
+
+                const actionGroups = tweetCardElement.querySelectorAll('.card-actions-group, .move-selector, .move-wrapper, .action-btn, .edit-btn, .screenshot-btn, .delete-btn, .move-btn, .global-screenshot-btn');
                 const originalDisplays = [];
                 actionGroups.forEach((el, i) => { originalDisplays[i] = el.style.display; el.style.display = 'none'; });
                 const allImages = tweetCardElement.querySelectorAll('img');
@@ -1420,9 +1441,19 @@
             } catch (err) {
                 console.error(err);
                 showToast("截图失败: " + (err.message || "未知错误"));
+            }finally{
+                if (container) container.classList.remove('screenshot-mode');
             }
         }
-
+        
+        function moveTweet(card, direction) {
+            const feed = document.getElementById('feed'); const cards = Array.from(feed.querySelectorAll('.tweet-card')); const idx = cards.indexOf(card);
+            if(idx===-1) return; let newIdx = idx;
+            if(direction==='up' && idx>0) newIdx = idx-1; else if(direction==='down' && idx<cards.length-1) newIdx = idx+1; else if(direction==='top') newIdx=0; else if(direction==='bottom') newIdx=cards.length-1;
+            if(newIdx===idx) { showToast("阿罗娜提醒：边界不可移动！ o(> <;)o"); return; }
+            if(newIdx<idx) feed.insertBefore(card, cards[newIdx]); else feed.insertBefore(card, cards[newIdx+1]);
+            showToast(`普拉娜提醒：已移动至${direction==='top'?'顶部':direction==='bottom'?'底部':(direction==='up'?'上一格':'下一格')}！ (●'◡'●)`);
+        }
         function attachCardActions(card) {
             if (card.querySelector('.card-actions-group')) return;
             const actionsGroup = document.createElement('div');
@@ -1443,6 +1474,37 @@
             deleteBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M4 7h16M10 11v6M14 11v6M5 7l1 13a2 2 0 0 0 2 2h8a2 2 0 0 0 2-2l1-13M9 7V4a1 1 0 0 1 1-1h4a1 1 0 0 1 1 1v3"/></svg><span>删除</span>`;
             deleteBtn.addEventListener('click', (e) => { e.stopPropagation(); if(confirm('删除此推文？')){ recordHistory('delete_tweet'); card.remove(); recordHistory('delete_tweet_done'); showToast("已删除"); } });
             
+            const moveWrapper = document.createElement('div');
+            moveWrapper.style.position = 'relative';
+            moveWrapper.style.display = 'inline-flex';
+            const moveBtn = document.createElement('button');
+            moveBtn.className = 'action-btn move-btn';
+            moveBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="var(--hare-green)" stroke-width="2" fill="none"><path d="M12 5v14m-4-4l4 4 4-4M8 9l4-4 4 4"/></svg><span>移动</span>`;
+            const selectorMenu = document.createElement('div');
+            selectorMenu.className = 'move-selector';
+            selectorMenu.innerHTML = `<div data-dir="up">⬆ 上移一位</div><div data-dir="down">⬇ 下移一位</div><hr><div data-dir="top">▲ 置顶</div><div data-dir="bottom">▼ 置底</div>`;
+            moveBtn.addEventListener('click', (e) => { 
+                e.stopPropagation();
+                e.preventDefault();
+                // 关闭其他展开的菜单
+                document.querySelectorAll('.move-selector').forEach(m => { if (m !== selectorMenu) m.classList.remove('show'); });
+                selectorMenu.classList.toggle('show');
+            });
+            selectorMenu.querySelectorAll('[data-dir]').forEach(opt => {
+                opt.addEventListener('click', (e) => {
+                    e.stopPropagation();
+                    const direction = opt.getAttribute('data-dir');
+                    moveTweet(card, direction);
+                    selectorMenu.classList.remove('show');
+                });
+            });
+            // 点击其他地方关闭菜单
+            document.addEventListener('click', (e) => {
+                if (!moveWrapper.contains(e.target)) selectorMenu.classList.remove('show');
+            });
+            moveWrapper.appendChild(moveBtn);
+            moveWrapper.appendChild(selectorMenu);
+
             if (window.innerWidth <= 768) {
                 editBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M17 3L21 7L7 21H3V17L17 3Z"/><path d="M15 5L19 9"/></svg>`;
                 screenshotBtn.innerHTML = `<svg viewBox="0 0 24 24" stroke="currentColor" stroke-width="1.8" fill="none"><path d="M23 19a2 2 0 0 1-2 2H3a2 2 0 0 1-2-2V8a2 2 0 0 1 2-2h4l2-3h6l2 3h4a2 2 0 0 1 2 2z"/><circle cx="12" cy="13" r="4"/></svg>`;
@@ -1452,6 +1514,7 @@
             actionsGroup.appendChild(editBtn);
             actionsGroup.appendChild(screenshotBtn);
             actionsGroup.appendChild(deleteBtn);
+            actionsGroup.appendChild(moveWrapper);
             
             card.style.position = 'relative'; 
             card.appendChild(actionsGroup);
@@ -1541,6 +1604,9 @@
             };
             
             const onMouseDown = (e) => {
+                if (e.target.closest('.action-btn') || e.target.closest('.move-selector')) {
+                    return;
+                }
                 if (e.button !== 0) return;
                 if (e.target.closest('.action-btn')) return;
                 e.preventDefault();
